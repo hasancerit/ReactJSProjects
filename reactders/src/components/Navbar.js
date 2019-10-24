@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-
+ 
 
 class Navbar extends Component {
     render() {
         return (
-            <div>
-                <h2> {this.props.title} </h2>
-                <hr></hr>
+            <div className="col-md-8 mb-4">
+                User
             </div>
         )
     }
