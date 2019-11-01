@@ -7,7 +7,7 @@ import UserConsumer from './context.js'; //context api, state'e erişebilmek iç
 
 class Kisi extends Component {
     state = {
-        isVisible : true
+        isVisible : false
     } 
 
     onClickEvent = (e) => {
@@ -37,7 +37,7 @@ class Kisi extends Component {
         let {isVisible:visibleState} = this.state;
 
         return(
-            <UserConsumer>
+            <UserConsumer> 
                 {
                     value => {
                         const {dispatch} = value;
@@ -45,7 +45,8 @@ class Kisi extends Component {
                         return (
                             <div className="col-md-8 mb-4">
                                 <div className = "card">
-                                    <div className="card-header d-flex justify-content-between">
+                                    <div className="card-header d-flex justify-content-between"  
+                                            style={visibleState ? {backgroundColor : "#62848d",color:"white"}:null}>
                                         <h4 onClick={this.onClickEvent} className = "d-inline">{name}</h4>
                                         <h4 className = "d-inline">{surname}</h4>
                                         <i onClick = {this.onDeleteUser.bind(this,dispatch)} className="fas fa-user-clock"></i>
@@ -77,13 +78,13 @@ Kisi.propTypes = { //Özellikleri bu şekilde belirtebiliriz. Zorunlu mu? Length
     name : PropTypes.string.isRequired, //Zorunlu
     surname : PropTypes.string.isRequired,
     aciklama : PropTypes.string.isRequired,
-    id : PropTypes.number.isRequired
+    id : PropTypes.string.isRequired
 }
 
 Kisi.defaultProps = { //Yollanmazsa, def değerler
     name : "İsim Yok",
     surname : "Soyisim yok",
     aciklama : "Aciklama Yok",
-    id : 0
+    id : "0"
 }
 export default Kisi;

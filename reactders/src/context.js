@@ -13,6 +13,11 @@ const reducer = (state,action) => {
         ...state, //state'in içindekileri aldık.
         users : state.users.filter(user => action.payload !== user.id)
       }
+    case "KULLANICI_EKLE":
+      return{
+        ...state,
+        users : [...state.users,action.payload]
+      }
     default:
       return state
   }
@@ -22,13 +27,13 @@ export class UserProvider extends Component { //PROVİDER
     state = { //Normalde app.js içinde olan state
        users : [
           {
-            id : 0,name : "Hasan",surname:"Cerit",aciklama : "JS"
+            id : "0",name : "Hasan",surname:"Cerit",aciklama : "JS"
           },
           {
-            id : 1, name : "Onur Ekin",surname:"Gün",aciklama : "SAP"
+            id : "1", name : "Onur Ekin",surname:"Gün",aciklama : "SAP"
           },
           {
-            id : 3,name:"",surname:"",aciklama:""
+            id : "3",name:"Deniz",surname:"İnan",aciklama:"İngiliççe"
           }
         ],
 
