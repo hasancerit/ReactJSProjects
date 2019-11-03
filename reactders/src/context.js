@@ -1,4 +1,5 @@
 import React, { Component } from 'react'  
+import axios from 'axios';
 
 const UserContext = React.createContext();
 //mContext bana Provider ve Consumer oluşturmamı sağlayacak.
@@ -25,17 +26,7 @@ const reducer = (state,action) => {
 
 export class UserProvider extends Component { //PROVİDER
     state = { //Normalde app.js içinde olan state
-       users : [
-          {
-            id : "0",name : "Hasan",surname:"Cerit",aciklama : "JS"
-          },
-          {
-            id : "1", name : "Onur Ekin",surname:"Gün",aciklama : "SAP"
-          },
-          {
-            id : "3",name:"Deniz",surname:"İnan",aciklama:"İngiliççe"
-          }
-        ],
+       users : [],
 
         //Dispatch, consumer tarafından actionların gönderileceği bir fonksiyon. Disptach de reducerı çalıştırarak, state'i değiştiir
         //Consumer, action paramı ile dispatch'i çalıştırır. dispacth de reducer'ı, state ve action parametreleri ile çağırı
@@ -49,7 +40,16 @@ export class UserProvider extends Component { //PROVİDER
         }
         */
     };
-        
+
+    componentDidMount = async () => {
+      console.log("MOUNT EDİLDİ context")
+        const response = await axios.get("http://localhost:8080/getusers");
+      this.setState({
+        users:response.data
+      })
+      console.log(response);
+    }
+    
     render() {
         return (
             <UserContext.Provider value={this.state}>
@@ -58,6 +58,7 @@ export class UserProvider extends Component { //PROVİDER
         )
     }
 }
+
 
 const UserConsumer = UserContext.Consumer; //CONSUMER
 export default UserConsumer;

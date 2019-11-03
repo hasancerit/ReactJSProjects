@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import './comp1c.css'
+import '../comp1c.css'
 import PropTypes from 'prop-types'
-import UserConsumer from './context.js'; //context api, state'e erişebilmek için consumerı
+import UserConsumer from '../context.js'; //context api, state'e erişebilmek için consumerı
+import axios from 'axios';
 
 
 
@@ -25,8 +26,10 @@ class Kisi extends Component {
         })
     }
 
-    onDeleteUser = (dispatch,e) =>{
+    onDeleteUser =async (dispatch,e) =>{
         const id = this.props.id;
+        await axios.get("http://localhost:8080/deleteuser/"+id);
+
         dispatch({type:"KULLANİCİ_SİL", payload : id})
         //Dispatch'e action yolladık, eylem ve uygulanacak state
         //State değişeceği zaman consumer sadece bunu yapar, Provider'dan aldığı dispatch'e, parametre olarak acion vererek çalıştırır

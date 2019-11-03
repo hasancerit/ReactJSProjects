@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Kisi from './Kisi';
-import UserConsumer from './context.js'; //context api, state'e erişebilmek için consumerı
+import UserConsumer from '../context.js'; //context api, state'e erişebilmek için consumerı
 
 
 class Users extends Component {
@@ -9,6 +9,7 @@ class Users extends Component {
         // Fonksiyon parametersi olarak, UserProvider componentinin yolladığı value probsu olacak.
         // UserProvider bu probs içinde state'ini yollar. Biz de value parametresi ile state'e erişiriz.
     render(){
+        console.log("USERS RENDER")
     return(  
             <UserConsumer>
                 {

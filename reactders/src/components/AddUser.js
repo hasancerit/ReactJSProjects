@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import posed from 'react-pose';
-import UserConsumer from './context';
+import UserConsumer from '../context';
+import axios from 'axios';
 var uniqid = require('uniqid');
 
 const AnimationBox = posed.div({//Animasyoun div'imizi oluşturduk
@@ -38,7 +39,7 @@ class AddUser extends Component {
         })
     }
 
-    userEkle = (dispatch,e) => {
+    userEkle = async (dispatch,e) => {
             e.preventDefault(); //Form Çalıştığında sayfa yenilenmesin
             const{isim,soyisim,aciklama} = this.state;
 
@@ -49,7 +50,9 @@ class AddUser extends Component {
                 id : uniqid()
             }
 
-            dispatch({type : "KULLANICI_EKLE", payload : newUser});
+            const response =await axios.post("http://localhost:8080/userekle",newUser);
+
+            dispatch({type : "KULLANICI_EKLE", payload : response.data});
             this.setState({
                 isim : "",
                 soyisim : "",
@@ -59,6 +62,7 @@ class AddUser extends Component {
     }
 
     render() {
+        console.log("AddUser RENDER")
         const isVisible = this.state.visible;
         const {isim,soyisim,aciklama} = this.state;
         return(
